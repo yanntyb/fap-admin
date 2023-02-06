@@ -31,11 +31,10 @@ class Calendar extends Component
             ->whereDate('end', '<=', $this->end)
             ->get()
             ->map(static fn(CalendarEvent $event) => [
+                'id' => $event->id,
                 'title' => $event->title,
-                'start' => $event->start->format('Y-m-d'),
-                'startTime' => $event->start->format('H:i:s'),
-                'end' => $event->end->format('Y-m-d H:i:s'),
-                'endTime' => $event->end->format('H:i:s'),
+                'start' => $event->start->toDateTimeLocalString(),
+                'end' => $event->end->toDateTimeLocalString(),
             ])
             ->toArray();
     }

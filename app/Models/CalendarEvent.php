@@ -3,9 +3,14 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property Carbon $start
+ * @property Carbon $end
+ */
 class CalendarEvent extends Model
 {
     use HasFactory;
@@ -13,7 +18,7 @@ class CalendarEvent extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'start' => 'date',
-        'end' => 'date',
+        'start' => 'datetime',
+        'end' => 'datetime',
     ];
 }

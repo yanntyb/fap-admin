@@ -22,4 +22,6 @@ Prism.plugins.NormalizeWhitespace.setDefaults({
 });
 Prism.highlightAll();
 
+import '../sass/app.scss';
+
 import './calendar/calendar';
