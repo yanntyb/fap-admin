@@ -2,7 +2,7 @@
 
 namespace App\Models\Events\Type;
 
-use App\Http\Livewire\Event\UserMeeting\EditUserMeetingModal;
+use App\Http\Livewire\Event\UserMeeting\UserMeeting as Index;
 use App\Models\Events\Classes\AbstractEventAction;
 
 class UserMeeting extends AbstractEventAction
@@ -13,7 +13,7 @@ class UserMeeting extends AbstractEventAction
      */
     public function controllerActionClass(): string
     {
-        return EditUserMeetingModal::class;
+        return Index::class;
     }
 
     /**

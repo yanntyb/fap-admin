@@ -33,7 +33,7 @@ abstract class AbstractEventAction implements EventActionInterface
         }
         $class = $this->controllerActionClass();
         $instance = new $class;
-        $instance($event,...$this->getEventActionRelatedData($event));
+        return $instance($event);
     }
 
     /**
@@ -46,12 +46,12 @@ abstract class AbstractEventAction implements EventActionInterface
 
     /**
      * @param CalendarEvent $event
-     * @return array
+     * @return Collection
      */
-    protected function getEventActionRelatedData(CalendarEvent $event): array
+    static function getEventActionRelatedData(CalendarEvent $event): Collection
     {
-        $datas = [];
-        Collection::wrap($this->eventDataKeysToInvokeController())->each(function($key) use (&$datas, $event){
+        $datas = collect();
+        Collection::wrap(self::getInstance()->eventDataKeysToInvokeController())->each(function($key) use (&$datas, $event){
             $datas[$key] = $event->datas[$key] ?? null;
         });
         return $datas;

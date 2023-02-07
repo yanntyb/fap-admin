@@ -17,6 +17,7 @@ use App\Http\Livewire\Admin\Settings\Settings;
 use App\Http\Livewire\Admin\Users\EditUser;
 use App\Http\Livewire\Admin\Users\ShowUser;
 use App\Http\Livewire\Admin\Users\Users;
+use App\Http\Livewire\Event\UserMeeting\UserMeetingEditModal;
 use App\Http\Livewire\Welcome;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,14 @@ Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware'])->prefix('a
     Route::get('users/{user}', ShowUser::class)->name('admin.users.show');
 
     Route::get('planning', Planning::class)->name('admin.planning.index');
+
+    Route::prefix('event/type')->group( function(){
+        Route::prefix('user')->group(function(){
+            Route::prefix('user-meeting')->name('user-meeting.')->group(function(){
+                Route::get('edit/{event}', UserMeetingEditModal::class)->name('edit');
+            });
+        });
+    });
 });
 
 //Admin only routes

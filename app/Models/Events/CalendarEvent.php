@@ -17,6 +17,7 @@ use Illuminate\Support\Collection;
  * @property Carbon $start
  * @property Carbon $end
  * @property Eventable $eventable
+ * @property string $event
  */
 class CalendarEvent extends Model
 {

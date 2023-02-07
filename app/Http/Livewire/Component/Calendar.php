@@ -2,16 +2,19 @@
 
 namespace App\Http\Livewire\Component;
 
-use App\Models\CalendarEvent;
+use App\Models\Events\CalendarEvent;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 
 class Calendar extends Component
 {
     public string $start;
     public string $end;
+    public bool $showEditModal = false;
+    public string|null $modalClass = null;
+    public int|null $modalEventId = null;
+
+    protected $listeners = ['show-calendar-edit-modal' => 'showEventEditModal', 'closeModal' => 'closeModal'];
 
     public function mount(): void
     {
@@ -44,12 +47,19 @@ class Calendar extends Component
 
     private function getEventableData(CalendarEvent $event)
     {
-        dd($event->eventable->getCalendarData());
-        return [
-            'id' => $event->id,
-            'title' => $event->title,
-            'start' => $event->start->toDateTimeLocalString(),
-            'end' => $event->end->toDateTimeLocalString(),
-        ];
+        return $event->eventable->invokeEventAction($event->event, $event);
+    }
+
+    public function showEventEditModal($modalClass, $eventId)
+    {
+        $this->showEditModal = true;
+        $this->modalClass = $modalClass;
+        $this->modalEventId = $eventId;
+    }
+
+    public function closeModal()
+    {
+        $this->showEditModal = false;
+        $this->modalClass = null;
     }
 }

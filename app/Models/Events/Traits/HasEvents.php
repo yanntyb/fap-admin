@@ -32,17 +32,18 @@ trait HasEvents
     /**
      * @throws Exception
      */
-    public function invokeEventAction(string $eventClass, CalendarEvent $event): void
+    public function invokeEventAction(string $eventClass, CalendarEvent $event): mixed
     {
+        $eventClass = $this->getRealEventClass($eventClass);
         if(!$this->eventIsAssociatedToModel($eventClass)){
-            return;
+            return null;
         }
         $eventActionClass = $this->getEventAssociatedToModelRealArray()[0];
         /**
          * @var AbstractEventAction $eventActionInstance
          */
         $eventActionInstance = $eventActionClass::getInstance();
-        $eventActionInstance->invokeController(
+        return $eventActionInstance->invokeController(
             $event,
         );
     }
@@ -64,5 +65,15 @@ trait HasEvents
         return $array[array_keys($array)[0]];
     }
 
-
+    /**
+     * @param string $eventClass
+     * @return string
+     */
+    public function getRealEventClass(string $eventClass): string
+    {
+        if(\Str::contains($eventClass, 'App')){
+            return $eventClass;
+        }
+        return 'App\\Models\\Events\\Type\\' . $eventClass;
+    }
 }

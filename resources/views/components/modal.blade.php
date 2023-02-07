@@ -5,16 +5,13 @@
     'height' => 'lg:w-1/2'
 ])
 
-<div x-data="{ on: false }">
-    {{ $trigger }}
-
+<div x-data="{ on: true }" x-init="on = @entangle('showModal')">
     <div class="fixed z-50 inset-x-0 sm:inset-0 sm:flex sm:items-center sm:justify-center" x-show="on">
-
           <div
               class="fixed inset-0 transition-opacity"
               x-show="on"
-              x-on:close-modal.window="on = false"
-              x-on:keydown.escape.window="on = false"
+              x-on:close-modal.prevent="$wire.emit('closeModal')"
+              x-on:keydown.escape="$wire.emit('closeModal')"
               x-transition:enter="ease-out duration-300"
               x-transition:enter-start="opacity-0"
               x-transition:enter-end="opacity-100"
@@ -52,5 +49,10 @@
         </div>
 
     </div>
-
 </div>
+<script>
+    function closeModal()
+    {
+        console.log('ts');
+    }
+</script>

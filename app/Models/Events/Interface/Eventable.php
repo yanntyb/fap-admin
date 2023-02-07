@@ -23,6 +23,6 @@ interface Eventable
      * @param CalendarEvent $event
      * @return void
      */
-    public function invokeEventAction(string $eventClass, CalendarEvent $event): void;
+    public function invokeEventAction(string $eventClass, CalendarEvent $event): mixed;
 
 }
