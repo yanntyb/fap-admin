@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Component;
 
 use App\Models\Events\CalendarEvent;
+use App\Service\CalendarService;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -14,11 +15,13 @@ class Calendar extends Component
     public string|null $modalClass = null;
     public int|null $modalEventId = null;
 
+
     protected $listeners = ['show-calendar-edit-modal' => 'showEventEditModal', 'closeModal' => 'closeModal'];
 
     public function mount(): void
     {
         $this->initDate();
+        $this->setAllEventableClass();
     }
 
     public function render()
@@ -61,5 +64,11 @@ class Calendar extends Component
     {
         $this->showEditModal = false;
         $this->modalClass = null;
+    }
+
+    public function setAllEventableClass()
+    {
+        $events = CalendarService::getEventableClassInstance();
+        dd($events);
     }
 }

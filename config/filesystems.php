@@ -71,6 +71,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        storage_path('eventType') => app_path('Models/Events/Type'),
     ],
 
 ];

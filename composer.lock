@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dec6adea62e2eb2ced2bad82654c8d1c",
+    "content-hash": "4cefac98f003c861ebebc34b99a41df5",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -7395,16 +7395,16 @@
         },
         {
             "name": "laradumps/laradumps",
-            "version": "v1.8.2",
+            "version": "v1.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps.git",
-                "reference": "01351c7b67cc683178ca1bb302911e911b0530f7"
+                "reference": "346319b6971a6dfe0b83cfee1de716ecee17cb41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/01351c7b67cc683178ca1bb302911e911b0530f7",
-                "reference": "01351c7b67cc683178ca1bb302911e911b0530f7",
+                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/346319b6971a6dfe0b83cfee1de716ecee17cb41",
+                "reference": "346319b6971a6dfe0b83cfee1de716ecee17cb41",
                 "shasum": ""
             },
             "require": {
@@ -7413,6 +7413,7 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.8",
+                "illuminate/console": "^8.18 | ^9.0",
                 "illuminate/mail": "^8.18 | ^9.0",
                 "illuminate/support": "^8.18 | ^9.0",
                 "nunomaduro/larastan": "^1.0 | ^2.1",
@@ -7451,7 +7452,7 @@
             "homepage": "https://github.com/laradumps/laradumps",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps/issues",
-                "source": "https://github.com/laradumps/laradumps/tree/v1.8.2"
+                "source": "https://github.com/laradumps/laradumps/tree/v1.9.2"
             },
             "funding": [
                 {
@@ -7459,7 +7460,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-04T15:15:17+00:00"
+            "time": "2023-02-16T17:37:56+00:00"
         },
         {
             "name": "laravel/sail",
@@ -10381,5 +10382,5 @@
         "php": "^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }
