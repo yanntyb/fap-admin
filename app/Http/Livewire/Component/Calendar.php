@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Component;
 
 use App\Models\Events\CalendarEvent;
+use App\Models\Events\Classes\AbstractEventAction;
 use App\Service\CalendarService;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -15,6 +16,8 @@ class Calendar extends Component
     public string|null $modalClass = null;
     public int|null $modalEventId = null;
 
+    public array $creationEventComponent = [];
+
 
     protected $listeners = ['show-calendar-edit-modal' => 'showEventEditModal', 'closeModal' => 'closeModal'];
 
@@ -22,6 +25,8 @@ class Calendar extends Component
     {
         $this->initDate();
         $this->setAllEventableClass();
+
+//        dd($this->creationEventComponent);
     }
 
     public function render()
@@ -53,22 +58,45 @@ class Calendar extends Component
         return $event->eventable->invokeEventAction($event->event, $event);
     }
 
-    public function showEventEditModal($modalClass, $eventId)
+    /**
+     * @param $modalClass
+     * @param $eventId
+     * @return void
+     */
+    public function showEventEditModal($modalClass, $eventId): void
     {
         $this->showEditModal = true;
         $this->modalClass = $modalClass;
         $this->modalEventId = $eventId;
     }
 
-    public function closeModal()
+    /**
+     * @return void
+     */
+    public function closeModal(): void
     {
         $this->showEditModal = false;
         $this->modalClass = null;
     }
 
-    public function setAllEventableClass()
+    /**
+     * @return void
+     */
+    public function setAllEventableClass(): void
     {
-        $events = CalendarService::getEventableClassInstance();
-        dd($events);
+        $events = CalendarService::getEventableClasses();
+        $this->creationEventComponent = $events
+            ->map(fn(AbstractEventAction $event) => [$event->title => $event->creationClass()])
+            ->toArray()[0]
+        ;
+    }
+
+    /**
+     * @param AbstractEventAction $class
+     * @return string
+     */
+    public function getCreationModalClass(AbstractEventAction $class): string
+    {
+        return $class->creationClass();
     }
 }

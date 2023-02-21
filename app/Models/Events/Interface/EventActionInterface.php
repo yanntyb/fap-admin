@@ -14,4 +14,6 @@ interface EventActionInterface
      */
     public function eventDataKeysToInvokeController(): array;
 
+    public function creationClass(): string;
+
 }

@@ -20,6 +20,7 @@ const createCalendar = (selector: string, options: CalendarOptions) => {
             minute: '2-digit',
             meridiem: false
         },
+        droppable: true,
         displayEventEnd: true,
         height: '100%',
         eventClick: function(info) {

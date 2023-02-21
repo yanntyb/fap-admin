@@ -10,6 +10,9 @@ use JetBrains\PhpStorm\Pure;
 
 abstract class AbstractEventAction implements EventActionInterface
 {
+
+    public string $title = 'event';
+
     /**
      * @return string
      */

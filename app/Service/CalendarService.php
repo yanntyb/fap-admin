@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 class CalendarService
 {
-    public static function getEventableClassInstance(): Collection
+    public static function getEventableClasses(): Collection
     {
         $eventsFiles = Collection::wrap(File::files( storage_path('eventType')));
         return $eventsFiles->map(static function(\SplFileInfo $fileInfo){

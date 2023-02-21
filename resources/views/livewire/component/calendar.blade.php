@@ -1,4 +1,13 @@
 <div>
+    <div id="creationList">
+        @foreach($creationEventComponent as $title => $eventClass)
+            <<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+                <div class='fc-event-main'>
+                    {{ $title }}
+                </div>
+            </div>
+        @endforeach
+    </div>
     <div class="container mx-auto">
         <div id='calendar-container' class="w-100 h-screen" wire:ignore>
             <div id='calendar' class="w-full h-100"></div>
@@ -11,8 +20,6 @@
 
 
 @push('js')
-{{--    @vite('resources/js/calendar/calendar.ts')--}}
-{{--    @dd($events)--}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const calendar = window.createCalendar('#calendar', {
@@ -24,11 +31,6 @@
         function getEventsFromBackend()
         {
             let events = [];
-            let title = '';
-            let start = '';
-            let end = '';
-            let startTime = '';
-            let endTime = '';
             @foreach($events as $event)
                 events = [...events, window.getCalendarEventData({
                     id: '{{ $event['id'] }}',
